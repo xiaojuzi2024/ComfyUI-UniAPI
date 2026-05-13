@@ -167,3 +167,7 @@ API 格式参考：OpenAI [Images API](https://platform.openai.com/docs/api-refe
 欢迎提交 Issue 和 Pull Request！
 
 如果你觉得这个插件有用，欢迎 ⭐ Star 支持！
+
+## 📬 联系
+
+如有问题或建议，欢迎联系：**278180890@qq.com**
