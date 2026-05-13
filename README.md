@@ -1,10 +1,10 @@
-# ComfyUI-UniAPI 🚀
+# ComfyUI-UniAPI
 
 > 通用第三方图像生成 API 调用节点 — 让 ComfyUI 工作流轻松接入任意兼容 OpenAI 格式的图像生成服务。
 
 ## 📖 简介
 
-**ComfyUI-UniAPI** 是一个轻量级 ComfyUI 自定义节点，充当"通用 API 图像生成网关"。它允许你在 ComfyUI 工作流中直接调用任意兼容 OpenAI Images API 格式的第三方服务（如 t8star.cn、OpenAI 等），无需编写额外代码。
+**ComfyUI-UniAPI** 是一个轻量级 ComfyUI 自定义节点，充当"通用 API 图像生成网关"。它允许你在 ComfyUI 工作流中直接调用任意兼容 OpenAI Images API 格式的第三方服务，无需编写额外代码。
 
 核心亮点：
 - ✅ **文生图 (text2img)** — 通过 JSON 请求生成图像
@@ -36,7 +36,7 @@
    ```
 2. 克隆本仓库：
    ```bash
-   git clone https://github.com/your-username/ComfyUI-UniAPI.git
+   git clone https://github.com/xiaojuzi2024/ComfyUI-UniAPI.git
    ```
 3. 重启 ComfyUI。
 
@@ -62,7 +62,7 @@
 | 参数 | 类型 | 说明 |
 |------|------|------|
 | `api_key` | STRING | API 密钥 |
-| `base_url` | STRING | API 基础地址（默认：`https://ai.t8star.cn`） |
+| `base_url` | STRING | API 基础地址 |
 | `prompt` | STRING | 正向提示词（多行文本） |
 | `mode` | ENUM | 模式：`text2img`（文生图）/ `img2img`（图生图） |
 
@@ -70,7 +70,7 @@
 
 | 参数 | 类型 | 默认值 | 说明 |
 |------|------|--------|------|
-| `model` | STRING | `gpt-image-2` | 模型名称 |
+| `model` | STRING | `""` | 模型名称 |
 | `image1~image4` | IMAGE | — | 参考图片（仅 img2img 模式使用） |
 | `quality` | ENUM | `auto` | 质量：`auto` / `high` / `medium` / `low` |
 | `size` | ENUM | `auto` | 尺寸：`auto` / `1024x1024` / `1536x1024` / `1024x1536` |
@@ -78,7 +78,7 @@
 | `output_format` | ENUM | `png` | 输出格式：`png` / `jpeg` / `webp` |
 | `moderation` | ENUM | `auto` | 审核级别：`auto` / `low` |
 | `n` | INT | `1` | 生成图片数量（1~4） |
-| `response_format` | ENUM | `url` | 响应格式：`url` / `b64_json` |
+| `response_format` | ENUM | `b64_json` | 响应格式：`url` / `b64_json` |
 | `seed` | INT | `0` | 随机种子（0 表示随机） |
 | `task_id` | STRING | — | 已有任务 ID，用于恢复查询 |
 
@@ -99,7 +99,7 @@
 [CLIP Text Encode] ──→ [UniAPI Model Call] ──→ [Save Image]
                           ├─ mode: text2img
                           ├─ api_key: sk-xxx
-                          ├─ base_url: https://ai.t8star.cn
+                          ├─ base_url: https://your-api-endpoint.com
                           └─ prompt: "a cat wearing a hat"
 ```
 
@@ -140,7 +140,7 @@
                     │         (multipart/form-data: 图片 + 文本字段)
                     │
                     ├── 响应含 task_id？
-                    │     ├── 是 → 轮询 Thread (10s × 60 次)
+                    │     ├── 是 → 轮询 (10s × 60 次)
                     │     └── 否 → 直接解码同步响应
                     │
                     └── 返回 [IMAGE, URL, task_id, JSON]

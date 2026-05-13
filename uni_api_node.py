@@ -66,12 +66,12 @@ class UniAPIModelCall:
         return {
             "required": {
                 "api_key": ("STRING", {"default": ""}),
-                "base_url": ("STRING", {"default": "https://ai.t8star.cn"}),
+                "base_url": ("STRING", {"default": ""}),
                 "prompt": ("STRING", {"multiline": True}),
                 "mode": (["text2img", "img2img"], {"default": "text2img"}),
             },
             "optional": {
-                "model": ("STRING", {"default": "gpt-image-2"}),
+                "model": ("STRING", {"default": ""}),
                 "image1": ("IMAGE",),
                 "image2": ("IMAGE",),
                 "image3": ("IMAGE",),
@@ -83,7 +83,7 @@ class UniAPIModelCall:
                 "moderation": (["auto", "low"], {"default": "auto"}),
                 "n": ("INT", {"default": 1, "min": 1, "max": 4}),
                 "task_id": ("STRING", {"default": ""}),
-                "response_format": (["url", "b64_json"], {"default": "url"}),
+                "response_format": (["url", "b64_json"], {"default": "b64_json"}),
                 "seed": ("INT", {"default": 0, "min": 0, "max": 2147483647}),
             }
         }
@@ -113,9 +113,9 @@ class UniAPIModelCall:
     # ── main entry ─────────────────────────────
 
     def generate_image(self, api_key, base_url, prompt, mode="text2img",
-                       model="gpt-image-2", quality="auto", size="auto",
+                       model="", quality="auto", size="auto",
                        background="auto", output_format="png", moderation="auto",
-                       n=1, task_id="", response_format="url", seed=0,
+                       n=1, task_id="", response_format="b64_json", seed=0,
                        image1=None, image2=None, image3=None, image4=None):
 
         if not api_key.strip():
